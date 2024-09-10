@@ -1,0 +1,68 @@
+.container {
+  width: 530px;
+  height: 165px;
+  position: relative;
+
+  background: white;
+  position: absolute;
+  border-radius: 24px;
+  border: 0.8px solid var(--grey-1);
+  background: var(--grey-2);
+  --padding: 6px;
+  padding: var(--padding);
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+  & > div {
+    border: 0.8px solid var(--grey-1);
+    border-radius: calc(24px - var(--padding));
+    background: white;
+    content: "";
+    width: 100%;
+    height: 100%;
+  }
+  .initial-state {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  .img-container {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    * {
+      border-radius: 12px;
+    }
+  }
+}
+.year {
+  letter-spacing: -0.32px;
+}
+
+.name {
+  letter-spacing: -1.28px;
+}
+
+.arrow-container {
+  background: white;
+  border-radius: 100px;
+  border: 0.8px solid var(--grey-1);
+  background: var(--grey-2);
+  --padding: 6px;
+  padding: var(--padding);
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 30px;
+  & > div {
+    border: 0.8px solid var(--grey-1);
+    border-radius: calc(100px - var(--padding));
+    background: white;
+    content: "";
+    width: 100%;
+    height: 100%;
+    padding: 8px 16px;
+  }
+}

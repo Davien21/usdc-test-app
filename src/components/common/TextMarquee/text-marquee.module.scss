@@ -1,0 +1,42 @@
+.home__hero__content {
+  width: 100%;
+  padding: 0 24px;
+}
+
+.home__hero__marquee {
+  width: fit-content;
+  position: relative;
+  will-change: transform;
+  display: flex;
+  animation: marquee 15s linear infinite;
+  animation-play-state: running;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.home__hero__title {
+  text-transform: uppercase;
+  font-family: "Blaka", Adjusted Arial Fallback, sans-serif;
+  font-size: 172px;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  background: linear-gradient(
+    180deg, 
+    white 0%, 
+    white 50%, /* white color stops at the 90% mark */
+    #ffffff76 70% /* the non-white color starts right at the 90% mark */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+@keyframes marquee {
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}

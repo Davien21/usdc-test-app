@@ -1,0 +1,101 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 500px;
+  background: linear-gradient(180deg, #70f, #40f);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  --container-width: 1440;
+  --container-height: 990;
+  position: relative;
+  .title {
+    position: absolute;
+    background: linear-gradient(to bottom, #828da0 0%, #828da0 100%);
+    color: #b6bfc9;
+    width: 76%;
+    max-width: 900px;
+    height: 182px;
+    overflow: hidden;
+    // font-size: 60px;
+    // font-weight: 600;
+    border-radius: 12px;
+    // z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: calc(var(--container-width) * 1px);
+  max-height: calc(var(--container-height) * 1px);
+  // border-radius: 24px;
+
+  & > .items {
+    position: relative;
+    // z-index: 2;
+    width: 100%;
+    // max-width: 1440px;
+    height: 100%;
+    // display: flex;
+    // place-content: center;
+    // place-items: center;
+    overflow: hidden;
+
+    // border-radius: 30px;
+    & > div {
+      &:nth-child(1) {
+        top: calc((84 / var(--container-height)) * 100%);
+        left: calc((-136 / var(--container-width)) * 100%);
+      }
+      &:nth-child(2) {
+        top: calc((28 / var(--container-height)) * 100%);
+        left: calc((539 / var(--container-width)) * 100%);
+      }
+      &:nth-child(3) {
+        top: calc((610 / var(--container-height)) * 100%);
+        left: calc((-214 / var(--container-width)) * 100%);
+      }
+      &:nth-child(4) {
+        top: calc((215 / var(--container-height)) * 100%);
+        left: calc((1112 / var(--container-width)) * 100%);
+      }
+      &:nth-child(5) {
+        top: calc((770 / var(--container-height)) * 100%);
+        left: calc((1167 / var(--container-width)) * 100%);
+      }
+      &:nth-child(6) {
+        top: calc((709 / var(--container-height)) * 100%);
+        left: calc((459 / var(--container-width)) * 100%);
+      }
+    }
+  }
+}
+
+.bg-img {
+  position: absolute;
+  // z-index: 2132;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  width: 100% !important;
+  * {
+    width: 100% !important;
+    border-radius: 24px;
+  }
+  img {
+    object-fit: cover;
+  }
+  border-radius: 24px;
+}
