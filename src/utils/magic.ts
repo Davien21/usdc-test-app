@@ -98,15 +98,16 @@ export async function getPermitSignature(
 }
 
 const getUSDCSignPayload = async ({
+  deadline,
   price,
   nonce,
   wallet,
 }: {
+  deadline: number;
   price: number;
   nonce: number;
   wallet: string;
 }) => {
-  const deadline = Math.floor(Date.now() / 1000) + 3600;
   const value = price;
 
   console.log("Value:", value);
@@ -146,39 +147,38 @@ const getUSDCSignPayload = async ({
   };
 };
 
-export async function getUSDCPermitSignature({ price }: { price: number }) {
-  try {
-    const provider = new ethers.BrowserProvider(magicInstance.rpcProvider);
+export async function getUSDCPermitSignatureAndDeadline({
+  price,
+}: {
+  price: number;
+}) {
+  const provider = new ethers.BrowserProvider(magicInstance.rpcProvider);
 
-    const USDC_Contract = new ethers.Contract(
-      USDC_BASE_SEPOLIA_ADDRESS,
-      USDC_BASE_SEPOLIA_ABI,
-      provider
-    );
+  const USDC_Contract = new ethers.Contract(
+    USDC_BASE_SEPOLIA_ADDRESS,
+    USDC_BASE_SEPOLIA_ABI,
+    provider
+  );
 
-    const signer = await provider.getSigner();
-    console.log("signer", signer);
-    const wallet = await signer.getAddress();
+  const signer = await provider.getSigner();
+  console.log("signer", signer);
+  const wallet = await signer.getAddress();
 
-    const nonce = Number(await USDC_Contract.nonces(wallet));
-    console.log("Nonce:", nonce.toString());
+  const nonce = Number(await USDC_Contract.nonces(wallet));
+  const deadline = Math.floor(Date.now() / 1000) + 3600;
 
-    const signedPayload = await getUSDCSignPayload({
-      price,
-      nonce,
-      wallet,
-    });
+  const signedPayload = await getUSDCSignPayload({
+    deadline,
+    price,
+    nonce,
+    wallet,
+  });
 
-    // Request the signature via Magic's rpcProvider to ensure the Magic UI pops up
-    const signature = await magicInstance.rpcProvider.request({
-      method: "eth_signTypedData_v4",
-      params: [wallet, signedPayload],
-    });
+  // Request the signature via Magic's rpcProvider to ensure the Magic UI pops up
+  const signature = await magicInstance.rpcProvider.request({
+    method: "eth_signTypedData_v4",
+    params: [wallet, signedPayload],
+  });
 
-    console.log("Signature:", signature);
-
-    return signature;
-  } catch (error) {
-    console.error({ error });
-  }
+  return { signature, deadline };
 }

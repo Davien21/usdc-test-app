@@ -1,33 +1,45 @@
 import React from "react";
-import { loginWithEmail, getUSDCPermitSignature } from "../../utils/magic";
+import {
+  loginWithEmail,
+  getUSDCPermitSignatureAndDeadline,
+} from "../../utils/magic";
 
 export default function HomePage() {
   const handleLogin = async () => {
-    // const provider = new ethers.BrowserProvider(
-    //   (window as any)?.ethereum,
-    //   84532,
-    //   {
-    //     pollingInterval: 1000,
-    //   }
-    // );
-    // const signer = await provider.getSigner();
+    const email = `chidiebereekennia@gmail.com`;
+    loginWithEmail(email, true);
+  };
 
-    // console.log("signer", signer);
+  const handlePurchase = async () => {
     const fractions = 10;
     const pricePerFraction = 500;
     const price = fractions * pricePerFraction;
-    const signature = await getUSDCPermitSignature({ price });
-
-    const email = `chidiebereekennia@gmail.com`;
-    // loginWithEmail(email, true);
-    // await getPermitSignature()
-    // await beginOAuthFlow();
+    try {
+      const { signature, deadline } = await getUSDCPermitSignatureAndDeadline({
+        price,
+      });
+      console.log({ signature, deadline });
+      // do the api call here with the signature, no of fractions and deadline
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
     <main className="">
-      <div className="flex items-center justify-center text-6xl h-screen">
-        <button onClick={handleLogin}>Login</button>
+      <div className="flex flex-col gap-3 items-center justify-center text-6xl h-screen">
+        <button
+          className="border rounded py-2 px-4 text-lg bg-purple-100 hover:bg-purple-400"
+          onClick={handleLogin}
+        >
+          Login
+        </button>
+        <button
+          className="border rounded py-2 px-4 text-lg bg-purple-100 hover:bg-purple-400"
+          onClick={handlePurchase}
+        >
+          Purchase
+        </button>
       </div>
     </main>
   );
