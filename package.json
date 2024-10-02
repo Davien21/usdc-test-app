@@ -12,11 +12,14 @@
   "dependencies": {
     "@magic-ext/oauth": "^22.6.0",
     "@magic-ext/oauth2": "^9.6.0",
+    "@metamask/eth-sig-util": "^7.0.3",
+    "ethers": "^6.13.2",
     "framer-motion": "^11.0.28",
     "magic-sdk": "^28.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "web3": "^4.13.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",

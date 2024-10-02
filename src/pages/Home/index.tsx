@@ -1,11 +1,27 @@
-import React from 'react'
-import { beginOAuthFlow, loginWithEmail } from '../../utils/magic';
+import React from "react";
+import { loginWithEmail, getUSDCPermitSignature } from "../../utils/magic";
 
 export default function HomePage() {
   const handleLogin = async () => {
-    // const email = `chidiebereekennia@gmail.com`;
+    // const provider = new ethers.BrowserProvider(
+    //   (window as any)?.ethereum,
+    //   84532,
+    //   {
+    //     pollingInterval: 1000,
+    //   }
+    // );
+    // const signer = await provider.getSigner();
+
+    // console.log("signer", signer);
+    const fractions = 10;
+    const pricePerFraction = 500;
+    const price = fractions * pricePerFraction;
+    const signature = await getUSDCPermitSignature({ price });
+
+    const email = `chidiebereekennia@gmail.com`;
     // loginWithEmail(email, true);
-    await beginOAuthFlow();
+    // await getPermitSignature()
+    // await beginOAuthFlow();
   };
 
   return (
@@ -14,5 +30,5 @@ export default function HomePage() {
         <button onClick={handleLogin}>Login</button>
       </div>
     </main>
-  )
+  );
 }
