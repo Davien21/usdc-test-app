@@ -92,7 +92,7 @@ export async function getUSDCPermitSignatureAndDeadline({
 }: {
   price: number;
 }) {
-  const provider = new ethers.JsonRpcProvider(magicInstance.rpcProvider as any);
+  const provider = new ethers.BrowserProvider(magicInstance.rpcProvider as any);
 
   const USDC_Contract = new ethers.Contract(
     USDC_BASE_SEPOLIA_ADDRESS,
