@@ -37,66 +37,6 @@ export const loginWithEmail = async (
   }
 };
 
-export async function getPermitSignature(
-  signer: any,
-  token: any,
-  spender: any,
-  value: any,
-  deadline: any
-) {
-  const address = await signer.getAddress();
-  const [nonce, name, version, chainId] = await Promise.all([
-    token.nonces(address),
-    token.name(),
-    "1",
-    signer.getChainId(),
-  ]);
-
-  const signature = ethers.Signature.from(
-    await signer._signTypedData(
-      {
-        name,
-        version,
-        chainId,
-        verifyingContract: token.address,
-      },
-      {
-        Permit: [
-          {
-            name: "owner",
-            type: "address",
-          },
-          {
-            name: "spender",
-            type: "address",
-          },
-          {
-            name: "value",
-            type: "uint256",
-          },
-          {
-            name: "nonce",
-            type: "uint256",
-          },
-          {
-            name: "deadline",
-            type: "uint256",
-          },
-        ],
-      },
-      {
-        owner: address,
-        spender,
-        value,
-        nonce,
-        deadline,
-      }
-    )
-  );
-
-  return signature;
-}
-
 const getUSDCSignPayload = async ({
   deadline,
   price,
@@ -152,7 +92,7 @@ export async function getUSDCPermitSignatureAndDeadline({
 }: {
   price: number;
 }) {
-  const provider = new ethers.BrowserProvider(magicInstance.rpcProvider);
+  const provider = new ethers.JsonRpcProvider(magicInstance.rpcProvider as any);
 
   const USDC_Contract = new ethers.Contract(
     USDC_BASE_SEPOLIA_ADDRESS,

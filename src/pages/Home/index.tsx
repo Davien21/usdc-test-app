@@ -3,8 +3,11 @@ import {
   loginWithEmail,
   getUSDCPermitSignatureAndDeadline,
 } from "../../utils/magic";
+import { useUSDCBalance } from "../../hooks/useUSDCBalance";
 
 export default function HomePage() {
+  const { balance } = useUSDCBalance();
+  console.log({ balance });
   const handleLogin = async () => {
     const email = `chidiebereekennia@gmail.com`;
     loginWithEmail(email, true);
