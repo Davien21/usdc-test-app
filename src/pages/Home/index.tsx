@@ -9,7 +9,7 @@ export default function HomePage() {
   const { balance } = useUSDCBalance();
   console.log({ balance });
   const handleLogin = async () => {
-    const email = `chidiebereekennia@gmail.com`;
+    const email = `eobumma@gmail.com`;
     loginWithEmail(email, true);
   };
 
