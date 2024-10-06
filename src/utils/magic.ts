@@ -105,7 +105,8 @@ export async function getUSDCPermitSignatureAndDeadline({
   const wallet = await signer.getAddress();
 
   const nonce = Number(await USDC_Contract.nonces(wallet));
-  const deadline = Math.floor(Date.now() / 1000) + 3600;
+  console.log({ nonce });
+  const deadline = Math.floor(Date.now() / 1000) + 3600 * 24;
 
   const signedPayload = await getUSDCSignPayload({
     deadline,
@@ -119,6 +120,7 @@ export async function getUSDCPermitSignatureAndDeadline({
     method: "eth_signTypedData_v4",
     params: [wallet, signedPayload],
   });
-
+  const { v, r, s } = ethers.Signature.from(signature);
+  console.log({ v, r, s });
   return { signature, deadline };
 }
